@@ -1,0 +1,30 @@
+<!-- people/people.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>People - Mnemo</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <a href="../index.html">Home</a>
+    <a href="../tasks/tasks.html">Tasks</a>
+    <a href="../dates/dates.html">Dates</a>
+    <a href="../ideas/ideas.html">Ideas</a>
+  </div>
+
+  <div class="container">
+    <h1>People</h1>
+    <input type="text" id="person-name" placeholder="Enter Name" />
+    <input type="text" id="person-met" placeholder="Where/How Met" />
+    <button id="add-person-btn">Add Person</button>
+
+    <h2>People You've Met</h2>
+    <div id="people-list" class="task-list"></div>
+  </div>
+
+  <script src="people.js"></script> <!-- Link to people.js -->
+</body>
+</html>

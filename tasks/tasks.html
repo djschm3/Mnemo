@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks - Mnemo</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <a href="../index.html">Home</a>
+    <a href="../dates/dates.html">Dates</a>
+    <a href="../people/people.html">People</a>
+    <a href="../ideas/ideas.html">Ideas</a>
+  </div>
+
+  <div class="container">
+    <h1>Tasks</h1>
+    
+    <div class="header-row">
+      <button id="add-task-btn">+ Task</button>
+      <button id="add-category-btn">+ Category</button>
+    </div>
+
+    <!-- Category Filters -->
+    <div id="category-filters">
+      <button class="category-btn" data-category="all">All</button>
+      <button class="category-btn" data-category="home" style="background-color: red;">Home</button>
+      <button class="category-btn" data-category="work" style="background-color: blue;">Work</button>
+      <button class="category-btn" data-category="personal" style="background-color: green;">Personal</button>
+      <button class="category-btn" data-category="health" style="background-color: purple;">Health</button>
+    </div>
+
+    <!-- Task List -->
+    <div id="task-list-container">
+      <div id="task-list-header">
+        <div class="header-item" onclick="sortTasks('title')">Task Title <span id="title-sort">↑</span></div>
+        <div class="header-item" onclick="sortTasks('dueDate')">Due Date <span id="date-sort">↑</span></div>
+      </div>
+      <div id="active-tasks" class="task-list"></div>
+      <div id="completed-tasks" class="task-list"></div>
+    </div>
+
+    <!-- Quick Add Task -->
+    <div id="quick-add">
+      <input type="text" id="quick-task-input" placeholder="Add a new task...">
+      <button id="quick-add-btn">Add</button>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="addTaskModal" class="modal"></div>
+
+    <!-- Add Category Modal -->
+    <div id="addCategoryModal" class="modal"></div>
+  </div>
+
+  <script src="tasks.js"></script>
+</body>
+</html>
