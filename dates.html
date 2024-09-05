@@ -1,0 +1,34 @@
+<!-- dates.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dates</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Important Dates</h1>
+    <div id="date-list">
+      <!-- Dates will be displayed here -->
+    </div>
+    <input type="text" id="new-date" placeholder="Add a new date..." />
+    <button onclick="addDate()">Add Date</button>
+  </div>
+
+  <script>
+    function addDate() {
+      const dateInput = document.getElementById('new-date');
+      const dateList = document.getElementById('date-list');
+
+      if (dateInput.value.trim() !== '') {
+        const dateItem = document.createElement('div');
+        dateItem.innerText = dateInput.value;
+        dateList.appendChild(dateItem);
+        dateInput.value = ''; // Clear input field
+      }
+    }
+  </script>
+</body>
+</html>
