@@ -1,7 +1,14 @@
 // AddTaskModal.js
 
-function AddTaskModal({ addTask }) {
+// Define generateId locally, as it's used here
+function generateId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+function AddTaskModal({ addTask, categories }) {
   const modal = document.getElementById('addTaskModal');
+  let selectedCategory = 'uncategorized'; // Default category
+
   modal.innerHTML = `
     <div class="modal-content">
       <h3>Add New Task</h3>
@@ -21,8 +28,17 @@ function AddTaskModal({ addTask }) {
       <button onclick="closeModal('addTaskModal')">Cancel</button>
     </div>
   `;
+
   modal.style.display = 'block';
 
+  // Event listener to select a category
+  document.querySelectorAll('#category-select button').forEach(button => {
+    button.addEventListener('click', function() {
+      selectedCategory = this.dataset.category;
+    });
+  });
+
+  // Event listener to submit the new task
   document.getElementById('submit-new-task').addEventListener('click', () => {
     const taskTitle = document.getElementById('new-task-title').value;
     const dueDate = document.getElementById('new-task-dueDate').value;
@@ -33,7 +49,7 @@ function AddTaskModal({ addTask }) {
     }
 
     const newTask = {
-      id: generateId(),
+      id: generateId(), // Now defined locally
       title: taskTitle,
       category: selectedCategory,
       dueDate: dueDate || '',

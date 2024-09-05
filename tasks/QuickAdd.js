@@ -1,5 +1,10 @@
 // QuickAdd.js
 
+// Define generateId inside this file, as it's used here
+function generateId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
 function QuickAdd({ addTask }) {
   const quickAddDiv = document.getElementById('quick-add');
   quickAddDiv.innerHTML = `
@@ -13,7 +18,7 @@ function QuickAdd({ addTask }) {
     const taskInput = document.getElementById('quick-task-input');
     if (taskInput.value.trim()) {
       const newTask = {
-        id: generateId(),
+        id: generateId(), // Now defined locally
         title: taskInput.value,
         category: 'uncategorized',
         completed: false,

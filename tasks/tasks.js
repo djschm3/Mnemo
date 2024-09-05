@@ -20,11 +20,16 @@ function saveCategories() {
   localStorage.setItem('categories', JSON.stringify(categories));
 }
 
+// Function to generate unique IDs for tasks
+function generateId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
 // Function to add a new task
 function addTask(task) {
   tasks.push(task);
   saveTasks();
-  renderTasks();
+  renderTasks(); // Re-render tasks after adding a new task
 }
 
 // Function to add a new category
@@ -49,8 +54,8 @@ function renderCategories() {
   }
 }
 
-// Function to open task detail for editing
-function openTaskDetail(taskId) {
+// Function to open task detail for editing (now globally accessible)
+window.openTaskDetail = function(taskId) {
   const task = tasks.find(t => t.id === taskId);
   TaskDetail({ task, saveTask });
 }
@@ -70,24 +75,37 @@ function toggleComplete(taskId) {
   renderTasks();
 }
 
-// Close modal function
-function closeModal(modalId) {
+// Close modal function (now globally accessible)
+window.closeModal = function(modalId) {
   const modal = document.getElementById(modalId);
-  modal.style.display = 'none';
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Sorting function to sort tasks by title or due date (added this function)
+window.sortTasks = function (key) {
+  tasks.sort((a, b) => {
+    if (key === 'title') {
+      return a.title.localeCompare(b.title);
+    } else if (key === 'dueDate') {
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    }
+  });
+  renderTasks(); // Re-render the task list after sorting
 }
 
 // Set up event listeners and initial rendering
 document.addEventListener('DOMContentLoaded', () => {
-  renderCategories();
   renderTasks();
+  renderCategories(); // Ensure categories are rendered
 
-  // Quick Add Button Listener
-  const quickAddBtn = document.getElementById('quick-add-btn');
-  quickAddBtn.addEventListener('click', () => QuickAdd({ addTask }));
+  // Initialize Quick Add functionality
+  QuickAdd({ addTask });
 
   // Add Task Button Listener
   const addTaskBtn = document.getElementById('add-task-btn');
-  addTaskBtn.addEventListener('click', () => AddTaskModal({ addTask }));
+  addTaskBtn.addEventListener('click', () => AddTaskModal({ addTask, categories }));
 
   // Add Category Button Listener
   const addCategoryBtn = document.getElementById('add-category-btn');
